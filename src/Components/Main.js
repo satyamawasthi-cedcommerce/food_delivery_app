@@ -1,6 +1,8 @@
 // importing and creating the required output through MUI
 import * as React from "react";
 import { styled } from "@mui/material/styles";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -49,17 +51,46 @@ export default function Main(props) {
     props.setcartArr(props.cartArr.filter((cartItem) => cartItem.id !== id));
   };
   // this function affirms the user with an alert message of products been added to the cart
-  const success = () =>{
+  const success = () => {
     alert("your Order is successfully placed with us.");
     props.setcartArr([]);
-  }
+  };
+  var quantplus = (index) => {
+    var tempCartarr = [];
+    props.cartArr.map((it, ind) => {
+      // deleting item if quantity < 0
+      if (ind === index) {
+        tempCartarr = props.cartArr;
+        tempCartarr[index].quantity++;
+        props.setcartArr([...tempCartarr]);
+      }
+      return 1;
+    });
+  };
+  var quantminus = (index) => {
+    var tempCartarr = [];
+    props.cartArr.map((it, ind) => {
+      if (ind === index) {
+        tempCartarr = props.cartArr;
+        tempCartarr[index].quantity--;
+        if (tempCartarr[index].quantity === 0) {
+          alert(
+            "are you sure of the action taken? this might delete item from cart!!"
+          );
+          tempCartarr.splice(index, 1);
+        }
+        props.setcartArr([...tempCartarr]);
+      }
+      return 1;
+    });
+  };
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2} columns={16} style={{ padding: "1% 5%" }}>
           {props.menu.map((item, index) => (
             <>
-              <Grid item xs={8}>
+              <Grid item xs={8} id="product">
                 <div>
                   <div>
                     <Item
@@ -69,7 +100,7 @@ export default function Main(props) {
                         padding: "2%",
                       }}
                     >
-                      <div style={{ width: "50%" }}>
+                      <div style={{ width: "50%", textAlign: "left" }}>
                         <h3 style={{ textAlign: "left" }}>{item.name}</h3>
                         <h5 style={{ textAlign: "left" }}>{item.category}</h5>
                         <h4 style={{ textAlign: "left" }}>
@@ -119,14 +150,30 @@ export default function Main(props) {
               <th>Total</th>
             </tr>
             <tbody>
-              {props.cartArr.map((item) => (
+              {props.cartArr.map((item, index) => (
                 <>
                   <tr>
                     <td>{item.id}</td>
-                    <td><img src={item.image} alt="..." style={{width:"10%"}}/></td>
+                    <td>
+                      <img
+                        src={item.image}
+                        alt="..."
+                        style={{ width: "10%" }}
+                      />
+                    </td>
                     <td>{item.name}</td>
                     <td>{item.price}</td>
-                    <td>{item.quantity}</td>
+                    <td>
+                      <ControlPointIcon
+                        onClick={() => quantplus(index)}
+                        style={{ cursor: "pointer" }}
+                      />{" "}
+                      {item.quantity}{" "}
+                      <RemoveCircleOutlineIcon
+                        style={{ cursor: "pointer" }}
+                        onClick={() => quantminus(index)}
+                      />
+                    </td>
                     <td>
                       <DeleteForeverIcon
                         style={{ color: "red", cursor: "pointer" }}

@@ -12,7 +12,6 @@ export default function Nav() {
         <h5 className="navContent">Burgers</h5>
         <h5 className="navContent">Beverages</h5>
         <h5 className="navContent">More...</h5>
-
       </div>
     </div>
   );

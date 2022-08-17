@@ -1,44 +1,49 @@
-*{
-margin:0;
-padding:0;
+* {
+  margin: 0;
+  padding: 0;
 }
 .App {
   align-items: center;
 }
 /* css for nav */
-#navDiv{
+#navDiv {
   background-color: rgb(182, 180, 178);
   display: flex;
   justify-content: space-around;
-  padding:2%;
+  padding: 2%;
   margin-bottom: 1%;
 }
 /* css for navcontent */
 
-.navContent{
-  color:rgb(91, 91, 92)
+.navContent {
+  color: rgb(91, 91, 92);
 }
-.navContent:hover{
+.navContent:hover {
   background-color: antiquewhite;
   cursor: pointer;
 }
-#bottomNav{
+#bottomNav {
   display: flex;
   justify-content: space-around;
   background-color: rgb(194, 193, 191);
   padding: 3% 5%;
 }
 /* table css */
-table{
+table {
   border-collapse: collapse;
   width: 100%;
 }
-td,th{
+td,
+th {
   border: 1px solid #ddd;
   padding: 8px;
 }
-tr:nth-child(even){background-color: #f2f2f2;}
-tr:hover {background-color: #ddd;}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:hover {
+  background-color: #ddd;
+}
 th {
   padding-top: 12px;
   padding-bottom: 12px;
